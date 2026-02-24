@@ -64,6 +64,54 @@ function sendHome()
 	sendJSON(j);
 }
 
+function sendConfirm()
+{
+        var j = {
+            "key": "Confirm"
+        };
+      sendJSON(j);
+}
+
+function sendCursorUp()
+{
+        var j = {
+            "key": "CursorUp"
+        };
+      sendJSON(j);
+}
+
+function sendCursorLeft()
+{
+        var j = {
+            "key": "CursorLeft"
+        };
+      sendJSON(j);
+}
+
+function sendCursorRight()
+{
+        var j = {
+            "key": "CursorRight"
+        };
+      sendJSON(j);
+}
+
+function sendCursorDown()
+{
+        var j = {
+            "key": "CursorDown"
+        };
+      sendJSON(j);
+}
+
+function sendSource()
+{
+        var j = {
+            "key": "Source"
+        };
+      sendJSON(j);
+}
+
 function sendMute()
 {
         var j = {
@@ -128,6 +176,13 @@ function sendVolDown()
 <h1>Philips Fernbedienung</h1>
 <p><button onclick="sendStandby()"><h1>Shift+A: Ausschalten<br></h1></button></p>
 <p><button onclick="sendHome()">H: Home</button></p>
+<p><button onclick="sendSource()">S: Home</button></p>
+<p>Navigate: <button onclick="sendConfirm()">C: Home</button>
+	<button onclick="sendCursorUp()">Arrow Up: Home</button>
+	<button onclick="sendCursorLeft()">Arrow Left: Home</button>
+	<button onclick="sendCursorRight()">Arrow Right: Home</button>
+	<button onclick="sendCursorDown()">Arrow Down: Home</button>
+</p>
 <p>Volume: <button onclick="sendMute()">M: Mute</button>
 	<button onclick="sendVolUp8()">* UP</button>
 	<button onclick="sendVolDown8()">/ dn</button>
@@ -152,16 +207,28 @@ document.addEventListener('keydown', function(event) {
         + " keyCode: " + keyCode;
 
 	if (keyName === "ArrowUp") {
-		console.log("Pfeil nach oben gedrückt");
+        var j = {
+            "key": "CursorUp"
+        };
+      sendJSON(j);
 	}
 	if (keyName === "ArrowLeft") {
-		console.log("Pfeil nach links gedrückt");
+        var j = {
+            "key": "CursorLeft"
+        };
+      sendJSON(j);
 	}
 	if (keyName === "ArrowRight") {
-		console.log("Pfeil nach rechts gedrückt");
+        var j = {
+            "key": "CursorRight"
+        };
+      sendJSON(j);
 	}
 	if (keyName === "ArrowDown") {
-		console.log("Pfeil nach unten gedrückt");
+        var j = {
+            "key": "CursorDown"
+        };
+      sendJSON(j);
 	}
 });
 	
@@ -183,6 +250,26 @@ document.addEventListener ('keypress', function (event) {
 		) {
         var j = {
             "key": "Home"
+        };
+      sendJSON(j);
+   }
+
+   if (evt.ctrlKey == false && evt.shiftKey == false && evt.altKey == false && evt.keyCode == 13
+	|| evt.ctrlKey == false && evt.shiftKey == false && evt.altKey == false && evt.keyCode == 99
+	|| evt.ctrlKey == false && evt.shiftKey == true && evt.altKey == false && evt.keyCode == 67
+		) {
+        var j = {
+            "key": "Confirm"
+        };
+      sendJSON(j);
+   }
+
+   if (evt.ctrlKey == false && evt.shiftKey == false && evt.altKey == false && evt.keyCode == 13
+	|| evt.ctrlKey == false && evt.shiftKey == false && evt.altKey == false && evt.keyCode == 115
+	|| evt.ctrlKey == false && evt.shiftKey == true && evt.altKey == false && evt.keyCode == 83
+		) {
+        var j = {
+            "key": "Source"
         };
       sendJSON(j);
    }
