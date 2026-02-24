@@ -9,6 +9,7 @@ function getIPFromURL() {
     return params.get('ip') || '192.168.178.22';
 }
 
+let userInput = getIPFromURL();
 window.onload = function() {
 	let userInput = prompt("Philips TV IP address: ", getIPFromURL());
 };
