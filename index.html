@@ -137,10 +137,38 @@ function sendVolDown()
 
 <script>
 
+document.addEventListener('keydown', function(event) {
+    var evt = event || window.event;
+
+    // evt.key enthält den Namen der Taste, evt.keyCode die Zahl
+    var keyName = evt.key; 
+    var keyCode = evt.keyCode || evt.which;
+
+    document.getElementById("demo").innerHTML = "Tastenkombination keydown: "
+        + " ctrlKey: " + evt.ctrlKey
+        + " shiftKey: " + evt.shiftKey
+        + " altKey: " + evt.altKey
+        + " key: " + keyName
+        + " keyCode: " + keyCode;
+
+	if (keyName === "ArrowUp") {
+		console.log("Pfeil nach oben gedrückt");
+	}
+	if (keyName === "ArrowLeft") {
+		console.log("Pfeil nach links gedrückt");
+	}
+	if (keyName === "ArrowRight") {
+		console.log("Pfeil nach rechts gedrückt");
+	}
+	if (keyName === "ArrowDown") {
+		console.log("Pfeil nach unten gedrückt");
+	}
+});
+	
 document.addEventListener ('keypress', function (event) {
 
    var evt = event || window.event;
-   document.getElementById("demo").innerHTML = "Tastenkombination: "
+   document.getElementById("demo").innerHTML = "Tastenkombination keypress: "
 	+ " evt.ctrlKey " + evt.ctrlKey
 	+ " evt.shiftKey " + evt.shiftKey
 	+ " evt.altKey " + evt.altKey
