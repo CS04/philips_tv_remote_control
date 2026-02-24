@@ -2,13 +2,20 @@
 <html>
 <head>
 <script>
+
+		
 function getIPFromURL() {
     const params = new URLSearchParams(window.location.search);
     return params.get('ip') || '192.168.178.22';
 }
 
-const ipAddress = getIPFromURL();
+window.onload = function() {
+	let userInput = prompt("Philips TV IP address: ", getIPFromURL());
+};
 
+let ipAddress = userInput;
+console.log("Der Nutzer hat eingegeben:", userInput);
+	
 function sendJSON(data)
 {
     var url = `http://${ipAddress}:1925/1/input/key`;
