@@ -2,32 +2,40 @@
 <html>
 <head>
 <script>
+function getIPFromURL() {
+    const params = new URLSearchParams(window.location.search);
+    return params.get('ip') || '192.168.178.22';
+}
+
+const ipAddress = getIPFromURL();
+
 function sendJSON(data)
 {
-	var url = "http://192.168.178.22:1925/1/input/key";
+    var url = `http://${ipAddress}:1925/1/input/key`;
 
-	fetch(url, {
-	        method: 'POST', // *GET, POST, PUT, DELETE, etc.
-	        mode: 'no-cors', // no-cors, cors, *same-origin
-        	headers: {            'Content-Type': 'application/json',        },
-	        body: JSON.stringify(data), // body data type must match "Content-Type" header
-	}).then(res => res.json())
-	.then(response => console.log('Success:', JSON.stringify(response)))
-	.catch(error => console.error('Error:', error));
+    fetch(url, {
+            method: 'POST',
+            mode: 'no-cors',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(data),
+    }).then(res => res.json())
+    .then(response => console.log('Success:', JSON.stringify(response)))
+    .catch(error => console.error('Error:', error));
 }
+
 function sendJSONvolume(data)
 {
-       alert("Sending Json");
-	var url = "http://192.168.178.22:1925/1/audio/volume";
+    alert("Sending Json");
+    var url = `http://${ipAddress}:1925/1/audio/volume`;
 
-	fetch(url, {
-	        method: 'POST', // *GET, POST, PUT, DELETE, etc.
-	        mode: 'no-cors', // no-cors, cors, *same-origin
-        	headers: {            'Content-Type': 'application/json',        },
-	        body: JSON.stringify(data), // body data type must match "Content-Type" header
-	}).then(res => res.json())
-	.then(response => console.log('Success:', JSON.stringify(response)))
-	.catch(error => console.error('Error:', error));
+    fetch(url, {
+            method: 'POST',
+            mode: 'no-cors',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(data),
+    }).then(res => res.json())
+    .then(response => console.log('Success:', JSON.stringify(response)))
+    .catch(error => console.error('Error:', error));
 }
 
 
