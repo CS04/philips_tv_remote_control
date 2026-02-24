@@ -1,0 +1,208 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<script>
+function sendJSON(data)
+{
+	var url = "http://192.168.178.22:1925/1/input/key";
+
+	fetch(url, {
+	        method: 'POST', // *GET, POST, PUT, DELETE, etc.
+	        mode: 'no-cors', // no-cors, cors, *same-origin
+        	headers: {            'Content-Type': 'application/json',        },
+	        body: JSON.stringify(data), // body data type must match "Content-Type" header
+	}).then(res => res.json())
+	.then(response => console.log('Success:', JSON.stringify(response)))
+	.catch(error => console.error('Error:', error));
+}
+function sendJSONvolume(data)
+{
+       alert("Sending Json");
+	var url = "http://192.168.178.22:1925/1/audio/volume";
+
+	fetch(url, {
+	        method: 'POST', // *GET, POST, PUT, DELETE, etc.
+	        mode: 'no-cors', // no-cors, cors, *same-origin
+        	headers: {            'Content-Type': 'application/json',        },
+	        body: JSON.stringify(data), // body data type must match "Content-Type" header
+	}).then(res => res.json())
+	.then(response => console.log('Success:', JSON.stringify(response)))
+	.catch(error => console.error('Error:', error));
+}
+
+
+function sendStandby()
+{
+       alert("TV turn off (Standby)...");
+        var j = {
+            "key": "Standby"
+        };
+	sendJSON(j);
+}
+
+function sendHome()
+{
+        var j = {
+            "key": "Home"
+        };
+	sendJSON(j);
+}
+
+function sendMute()
+{
+        var j = {
+            "key": "Mute"
+        };
+      sendJSON(j);
+}
+
+function sendVolUp8()
+{
+        var j = {
+            "key": "VolumeUp"
+        };
+      sendJSON(j);
+      sendJSON(j);
+      sendJSON(j);
+      sendJSON(j);
+      sendJSON(j);
+      sendJSON(j);
+      sendJSON(j);
+      sendJSON(j);
+}
+
+function sendVolDown8()
+{
+        var j = {
+            "key": "VolumeDown"
+        };
+      sendJSON(j);
+      sendJSON(j);
+      sendJSON(j);
+      sendJSON(j);
+      sendJSON(j);
+      sendJSON(j);
+      sendJSON(j);
+      sendJSON(j);
+}
+
+function sendVolUp()
+{
+        var j = {
+            "key": "VolumeUp"
+        };
+      sendJSON(j);
+}
+
+function sendVolDown()
+{
+        var j = {
+            "key": "VolumeDown"
+        };
+      sendJSON(j);
+}
+
+
+</script>
+</head>
+		
+
+<body>
+
+<h1>Philips Fernbedienung</h1>
+<p><button onclick="sendStandby()"><h1>Shift+A: Ausschalten<br></h1></button></p>
+<p><button onclick="sendHome()">H: Home</button></p>
+<p>Volume: <button onclick="sendMute()">M: Mute</button>
+	<button onclick="sendVolUp8()">* UP</button>
+	<button onclick="sendVolDown8()">/ dn</button>
+	<button onclick="sendVolUp()">+: Volume Up</button>
+	<button onclick="sendVolDown()">-: Volume Down</button></p>
+<p id="demo"></p>
+
+<script>
+
+document.addEventListener ('keypress', function (event) {
+
+   var evt = event || window.event;
+   document.getElementById("demo").innerHTML = "Tastenkombination: "
+	+ " evt.ctrlKey " + evt.ctrlKey
+	+ " evt.shiftKey " + evt.shiftKey
+	+ " evt.altKey " + evt.altKey
+	+ " evt.keyCode " + evt.keyCode;
+
+   if (evt.ctrlKey == false && evt.shiftKey == true && evt.altKey == false && evt.keyCode == 65) {
+	sendStandby();
+   }
+
+   if (evt.ctrlKey == false && evt.shiftKey == false && evt.altKey == false && evt.keyCode == 104
+	|| evt.ctrlKey == false && evt.shiftKey == true && evt.altKey == false && evt.keyCode == 72
+		) {
+        var j = {
+            "key": "Home"
+        };
+      sendJSON(j);
+   }
+
+   if (evt.ctrlKey == false && evt.shiftKey == false && evt.altKey == false && evt.keyCode == 109
+	|| evt.ctrlKey == false && evt.shiftKey == true && evt.altKey == false && evt.keyCode == 77
+		) {
+        var j = {
+            "key": "Mute"
+        };
+      sendJSON(j);
+   }
+
+   if (evt.ctrlKey == false && evt.shiftKey == false && evt.altKey == false && evt.keyCode == 47
+		) {
+        var j = {
+            "key": "VolumeDown"
+        };
+      sendJSON(j);
+      sendJSON(j);
+      sendJSON(j);
+      sendJSON(j);
+      sendJSON(j);
+      sendJSON(j);
+      sendJSON(j);
+      sendJSON(j);
+   }
+
+   if (evt.ctrlKey == false && evt.shiftKey == false && evt.altKey == false && evt.keyCode == 42
+		) {
+        var j = {
+            "key": "VolumeUp"
+        };
+      sendJSON(j);
+      sendJSON(j);
+      sendJSON(j);
+      sendJSON(j);
+      sendJSON(j);
+      sendJSON(j);
+      sendJSON(j);
+      sendJSON(j);
+   }
+
+   if (evt.ctrlKey == false && evt.shiftKey == false && evt.altKey == false && evt.keyCode == 45
+		) {
+        var j = {
+            "key": "VolumeDown"
+        };
+      sendJSON(j);
+   }
+
+   if (evt.ctrlKey == false && evt.shiftKey == false && evt.altKey == false && evt.keyCode == 43
+		) {
+        var j = {
+            "key": "VolumeUp"
+        };
+      sendJSON(j);
+   }
+});
+
+
+
+</script>
+
+</body>
+</html>
+
