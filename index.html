@@ -3,7 +3,7 @@
 <head>
 <script>
 
-		
+            
 function getIPFromURL() {
     const params = new URLSearchParams(window.location.search);
     return params.get('ip') || '192.168.178.22';
@@ -11,12 +11,12 @@ function getIPFromURL() {
 
 let userInput = getIPFromURL();
 window.onload = function() {
-	let userInput = prompt("Philips TV IP address: ", getIPFromURL());
+      let userInput = prompt("Philips TV IP address: ", getIPFromURL());
 };
 
 let ipAddress = userInput;
 console.log("Using ipAddress:", ipAddress);
-	
+      
 function sendJSON(data)
 {
     var url = `http://${ipAddress}:1925/1/input/key`;
@@ -53,7 +53,7 @@ function sendStandby()
         var j = {
             "key": "Standby"
         };
-	sendJSON(j);
+      sendJSON(j);
 }
 
 function sendHome()
@@ -61,13 +61,21 @@ function sendHome()
         var j = {
             "key": "Home"
         };
-	sendJSON(j);
+      sendJSON(j);
 }
 
 function sendConfirm()
 {
         var j = {
             "key": "Confirm"
+        };
+      sendJSON(j);
+}
+
+function sendBack()
+{
+        var j = {
+            "key": "Back"
         };
       sendJSON(j);
 }
@@ -169,7 +177,7 @@ function sendVolDown()
 
 </script>
 </head>
-		
+            
 
 <body>
 
@@ -177,17 +185,18 @@ function sendVolDown()
 <p><button onclick="sendStandby()"><h1>Shift+A: Ausschalten<br></h1></button></p>
 <p><button onclick="sendHome()">H: Home</button></p>
 <p><button onclick="sendSource()">S: Source</button></p>
-<p>Navigate: <button onclick="sendConfirm()">C: Confirm</button>
-	<button onclick="sendCursorUp()">Arrow Up</button>
-	<button onclick="sendCursorLeft()">Arrow Left</button>
-	<button onclick="sendCursorRight()">Arrow Right</button>
-	<button onclick="sendCursorDown()">Arrow Down</button>
+<p><button onclick="sendBack()">Esc/B: Back</button></p>
+<p>Navigate: <button onclick="sendConfirm()">Enter/C: Confirm</button>
+      <button onclick="sendCursorUp()">Arrow Up</button>
+      <button onclick="sendCursorLeft()">Arrow Left</button>
+      <button onclick="sendCursorRight()">Arrow Right</button>
+      <button onclick="sendCursorDown()">Arrow Down</button>
 </p>
 <p>Volume: <button onclick="sendMute()">M: Mute</button>
-	<button onclick="sendVolUp8()">* UP</button>
-	<button onclick="sendVolDown8()">/ dn</button>
-	<button onclick="sendVolUp()">+: Volume Up</button>
-	<button onclick="sendVolDown()">-: Volume Down</button></p>
+      <button onclick="sendVolUp8()">* UP</button>
+      <button onclick="sendVolDown8()">/ dn</button>
+      <button onclick="sendVolUp()">+: Volume Up</button>
+      <button onclick="sendVolDown()">-: Volume Down</button></p>
 <p id="demo"></p>
 
 <script>
@@ -196,7 +205,7 @@ document.addEventListener('keydown', function(event) {
     var evt = event || window.event;
 
     // evt.key enthält den Namen der Taste, evt.keyCode die Zahl
-    var keyName = evt.key; 
+    var keyName = evt.key;
     var keyCode = evt.keyCode || evt.which;
 
     document.getElementById("demo").innerHTML = "Tastenkombination keydown: "
@@ -206,48 +215,54 @@ document.addEventListener('keydown', function(event) {
         + " key: " + keyName
         + " keyCode: " + keyCode;
 
-	if (keyName === "ArrowUp") {
+      if (keyName === "Escape") {
+        var j = {
+            "key": "Back"
+        };
+      sendJSON(j);
+      }
+      if (keyName === "ArrowUp") {
         var j = {
             "key": "CursorUp"
         };
       sendJSON(j);
-	}
-	if (keyName === "ArrowLeft") {
+      }
+      if (keyName === "ArrowLeft") {
         var j = {
             "key": "CursorLeft"
         };
       sendJSON(j);
-	}
-	if (keyName === "ArrowRight") {
+      }
+      if (keyName === "ArrowRight") {
         var j = {
             "key": "CursorRight"
         };
       sendJSON(j);
-	}
-	if (keyName === "ArrowDown") {
+      }
+      if (keyName === "ArrowDown") {
         var j = {
             "key": "CursorDown"
         };
       sendJSON(j);
-	}
+      }
 });
-	
+      
 document.addEventListener ('keypress', function (event) {
 
    var evt = event || window.event;
    document.getElementById("demo").innerHTML = "Tastenkombination keypress: "
-	+ " evt.ctrlKey " + evt.ctrlKey
-	+ " evt.shiftKey " + evt.shiftKey
-	+ " evt.altKey " + evt.altKey
-	+ " evt.keyCode " + evt.keyCode;
+      + " evt.ctrlKey " + evt.ctrlKey
+      + " evt.shiftKey " + evt.shiftKey
+      + " evt.altKey " + evt.altKey
+      + " evt.keyCode " + evt.keyCode;
 
    if (evt.ctrlKey == false && evt.shiftKey == true && evt.altKey == false && evt.keyCode == 65) {
-	sendStandby();
+      sendStandby();
    }
 
    if (evt.ctrlKey == false && evt.shiftKey == false && evt.altKey == false && evt.keyCode == 104
-	|| evt.ctrlKey == false && evt.shiftKey == true && evt.altKey == false && evt.keyCode == 72
-		) {
+      || evt.ctrlKey == false && evt.shiftKey == true && evt.altKey == false && evt.keyCode == 72
+            ) {
         var j = {
             "key": "Home"
         };
@@ -255,19 +270,29 @@ document.addEventListener ('keypress', function (event) {
    }
 
    if (evt.ctrlKey == false && evt.shiftKey == false && evt.altKey == false && evt.keyCode == 13
-	|| evt.ctrlKey == false && evt.shiftKey == false && evt.altKey == false && evt.keyCode == 99
-	|| evt.ctrlKey == false && evt.shiftKey == true && evt.altKey == false && evt.keyCode == 67
-		) {
+      || evt.ctrlKey == false && evt.shiftKey == false && evt.altKey == false && evt.keyCode == 99
+      || evt.ctrlKey == false && evt.shiftKey == true && evt.altKey == false && evt.keyCode == 67
+            ) {
         var j = {
             "key": "Confirm"
         };
       sendJSON(j);
    }
 
+   if (evt.ctrlKey == false && evt.shiftKey == false && evt.altKey == false && evt.keyCode == 27
+      || evt.ctrlKey == false && evt.shiftKey == false && evt.altKey == false && evt.keyCode == 98
+      || evt.ctrlKey == false && evt.shiftKey == true && evt.altKey == false && evt.keyCode == 66
+            ) {
+        var j = {
+            "key": "Back"
+        };
+      sendJSON(j);
+   }
+
    if (evt.ctrlKey == false && evt.shiftKey == false && evt.altKey == false && evt.keyCode == 13
-	|| evt.ctrlKey == false && evt.shiftKey == false && evt.altKey == false && evt.keyCode == 115
-	|| evt.ctrlKey == false && evt.shiftKey == true && evt.altKey == false && evt.keyCode == 83
-		) {
+      || evt.ctrlKey == false && evt.shiftKey == false && evt.altKey == false && evt.keyCode == 115
+      || evt.ctrlKey == false && evt.shiftKey == true && evt.altKey == false && evt.keyCode == 83
+            ) {
         var j = {
             "key": "Source"
         };
@@ -275,8 +300,8 @@ document.addEventListener ('keypress', function (event) {
    }
 
    if (evt.ctrlKey == false && evt.shiftKey == false && evt.altKey == false && evt.keyCode == 109
-	|| evt.ctrlKey == false && evt.shiftKey == true && evt.altKey == false && evt.keyCode == 77
-		) {
+      || evt.ctrlKey == false && evt.shiftKey == true && evt.altKey == false && evt.keyCode == 77
+            ) {
         var j = {
             "key": "Mute"
         };
@@ -284,7 +309,7 @@ document.addEventListener ('keypress', function (event) {
    }
 
    if (evt.ctrlKey == false && evt.shiftKey == false && evt.altKey == false && evt.keyCode == 47
-		) {
+            ) {
         var j = {
             "key": "VolumeDown"
         };
@@ -299,7 +324,7 @@ document.addEventListener ('keypress', function (event) {
    }
 
    if (evt.ctrlKey == false && evt.shiftKey == false && evt.altKey == false && evt.keyCode == 42
-		) {
+            ) {
         var j = {
             "key": "VolumeUp"
         };
@@ -314,7 +339,7 @@ document.addEventListener ('keypress', function (event) {
    }
 
    if (evt.ctrlKey == false && evt.shiftKey == false && evt.altKey == false && evt.keyCode == 45
-		) {
+            ) {
         var j = {
             "key": "VolumeDown"
         };
@@ -322,14 +347,14 @@ document.addEventListener ('keypress', function (event) {
    }
 
    if (evt.ctrlKey == false && evt.shiftKey == false && evt.altKey == false && evt.keyCode == 43
-		) {
+            ) {
         var j = {
             "key": "VolumeUp"
         };
       sendJSON(j);
    }
 
-	console.log("evt.keyCode:", evt.keyCode);
+      console.log("evt.keyCode:", evt.keyCode);
 
 });
 
@@ -339,4 +364,3 @@ document.addEventListener ('keypress', function (event) {
 
 </body>
 </html>
-
